@@ -26,9 +26,22 @@ $.ajax({
     console.log(response);
     var gifRating = $("<p>").text(response.rating);
     var gifTitle = $("<p>").text(response.title);
-    var gifImage = $("<img>").attr("src",response.images.);
+    var gifImage = $("<img>").attr("src",response.images.original);
 
     $("#dynamic-btnview").empty();
     $("#dynamic-btnview").append(gifRating, gifTitle, gifImage);
   }
   )};
+//dynamically adding buttons for the declared array
+  function addButtons(){
+    for(i=0;i< superheroList.length; i++){
+ var dynamicBtn = $("button");
+ dynamicBtn.addClass("giphy-btn");
+ dynamicBtn.attr("data-giphy", superheroList[i]);
+ dynamicBtn.text(superheroList[i]);
+ $("#dynamic-btnview").append(dynamicBtn);
+}
+}  
+
+//add on click here --> 
+
