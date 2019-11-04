@@ -22,17 +22,19 @@ $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    var giphyDiv = $("<div class ='superhero-giphy'>");
-    $("#giphy-btndisplay").append(giphyDiv);
+    var giphyDiv = $("<div class ='card-group'>");
+    $("#giphy-btndisplay").prepend(giphyDiv);
     for (i=0; i< response.data.length; i++){
         console.log(response.data)
+        var card = $("<div class ='card'>");
+        $(giphyDiv).prepend(card);
         var gifRating = $("<p>").text(response.data[i].rating);
         var gifTitle = $("<p>").text(response.data[i].title);
         var gifImage = $("<img>")
                         .attr("class",'super_hero_images')
                         .attr("src",response.data[i].images.original_still.url)
                         .attr('data-alt',response.data[i].images.original.url)
-        $("#giphy-btndisplay").prepend( gifRating, gifTitle, gifImage);
+        $(card).prepend( gifRating, gifTitle, gifImage);
     }
   }
 )};

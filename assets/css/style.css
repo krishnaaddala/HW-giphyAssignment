@@ -1,17 +1,13 @@
-.superhero-giphy {
-    float:absolute;
-    width: 33.33%;
-    padding: 5px;
-    height: 150px;
+.card {
+    min-width: 45%;
+    margin: 0.5%;
+    padding: 1%;
 }
 
-
-.row::after {
-    content: "";
-    clear: both;
-    display: table;
+.card > img {
+    height: 300px;
+}
+.giphy-btn{
+    background-color: grey;
 }
 
-.superhero-giphy{
-    
-}
