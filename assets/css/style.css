@@ -8,6 +8,32 @@
     height: 300px;
 }
 .giphy-btn{
-    background-color: grey;
+    background-color: skyblue;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0.75%;
+    margin: 1%;
+}
+.card{
+    background-color: rgba(245, 227, 227, 0.534);
+    font-weight: bold;
+    font-size: 25px;
+}
+#add-giphy{
+    background-color: whitesmoke;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 1%;
+    float: inherit;
 }
 
+h1{
+    display: inline;
+    padding: 0.25%;
+    font-weight: bold;
+    background-color: rgba(221, 159, 159, 0.534);
+
+}
+
+/* since I added bootstrap, i did not add additional media queries
+as this was already taking care of responsive layout --> images attached to GIT */
