@@ -13,35 +13,64 @@ var superheroList = ["Superman", "Iron Man", "Batman", "Captain America", "Flash
 
 //function to make an ajax call to get the queried list
 function giphyDisplay(){
-
-var superhero = $(this).attr("data-name");
+$("#giphy-btndisplay").empty();
+var superhero = $(this).attr("data-giphy");
 var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=tuHOptJN3WWLtwMil1BWJF8fU18JA1f5&q="+superhero+"&limit=10&offset=0&rating=G&lang=en";
-
+console.log(superhero);
 //Making an AJAX call
 $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
     var giphyDiv = $("<div class ='superhero-giphy'>");
-    console.log(response);
-    var gifRating = $("<p>").text(response.rating);
-    var gifTitle = $("<p>").text(response.title);
-    var gifImage = $("<img>").attr("src",response.images.original);
-
-    $("#dynamic-btnview").empty();
-    $("#dynamic-btnview").append(gifRating, gifTitle, gifImage);
+    $("#giphy-btndisplay").append(giphyDiv);
+    for (i=0; i< response.data.length; i++){
+        console.log(response.data)
+        var gifRating = $("<p>").text(response.data[i].rating);
+        var gifTitle = $("<p>").text(response.data[i].title);
+        var gifImage = $("<img>")
+                        .attr("class",'super_hero_images')
+                        .attr("src",response.data[i].images.original_still.url)
+                        .attr('data-alt',response.data[i].images.original.url)
+        $("#giphy-btndisplay").prepend( gifRating, gifTitle, gifImage);
+    }
   }
-  )};
+)};
+
+function addDynamicBtn(name){
+    var dynamicBtn = $("<button>") 
+        dynamicBtn.addClass("giphy-btn");
+        dynamicBtn.attr("data-giphy", name);
+        dynamicBtn.text(name);
+        $("#dynamic-btnview").append(dynamicBtn);
+}
+
 //dynamically adding buttons for the declared array
   function addButtons(){
+    console.log("print this")
+
     for(i=0;i< superheroList.length; i++){
- var dynamicBtn = $("button");
- dynamicBtn.addClass("giphy-btn");
- dynamicBtn.attr("data-giphy", superheroList[i]);
- dynamicBtn.text(superheroList[i]);
- $("#dynamic-btnview").append(dynamicBtn);
-}
+        addDynamicBtn(superheroList[i]);
+    }
 }  
 
-//add on click here --> 
+$("#add-giphy").on("click", function(event){
+    event.preventDefault();
+var superhero = $("#giphy-input").val().trim();
+superheroList.push(superhero);
+addDynamicBtn(superhero);
 
+});
+
+$(document).on("click", ".giphy-btn", giphyDisplay);
+
+$(document).on("click",".super_hero_images", function() {
+    img = this;
+    var imgSrc = img.getAttribute("src");
+    var imgAlt = img.getAttribute("data-alt");
+
+    img.setAttribute("src", imgAlt);
+    img.setAttribute("data-alt", imgSrc);
+
+
+});
